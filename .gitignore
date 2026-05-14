@@ -1,0 +1,29 @@
+# Ignore everything by default
+*
+
+# Allow directories so Git can traverse them
+!*/
+
+# Allow specific necessary files
+!.gitignore
+!*.html
+!*.css
+!*.js
+!*.php
+!*.txt
+!*.json
+!*.md
+!*.ico
+!*.htaccess
+
+# Allow image formats
+!*.png
+!*.jpg
+!*.jpeg
+!*.gif
+!*.svg
+
+# Allow audio formats
+!*.ogg
+!*.mp3
+!*.wav

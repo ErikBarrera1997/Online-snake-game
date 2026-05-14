@@ -1,0 +1,32 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: var(--bg-main, #34495e);
+  background-size: cover;
+  font-family: Arial, sans-serif;
+}
+
+#container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  background-color: var(--bg-container, #bdc3c7);
+  padding: 10px;
+  border: 4px solid var(--border-primary, #7f8c8d);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  margin-top: 10px;
+}
+
+#field {
+  display: grid;
+  background-color: var(--bg-main, #34495e);
+  padding: 5px;
+  width: fit-content;
+  height: fit-content;
+}
+
