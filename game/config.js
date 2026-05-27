@@ -10,4 +10,5 @@ const GAME_SETTINGS = {
 };
 
 const TILE_SIZE = 30;
+let squares = [];
 let square;

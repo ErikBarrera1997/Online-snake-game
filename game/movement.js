@@ -3,15 +3,17 @@ let currentDirection = { x: 0, y: 0 };
 let moveAccumulator = 0;
 const MOVE_INTERVAL_MS = 120; // Intervalo de movimiento en milisegundos
 
+// Pre-cálculo de límites para optimizar rendimiento
+const MAX_WIDTH = GAME_SETTINGS.SIZE.WIDTH * TILE_SIZE;
+const MAX_HEIGHT = GAME_SETTINGS.SIZE.HEIGHT * TILE_SIZE;
+
 /**
  * Verifies if the next position is outside the game boundaries.
  */
 function isBorder(x, y) {
-  const maxWidth = GAME_SETTINGS.SIZE.WIDTH * TILE_SIZE;
-  const maxHeight = GAME_SETTINGS.SIZE.HEIGHT * TILE_SIZE;
-  return x < 0 || y < 0 || x + TILE_SIZE > maxWidth || y + TILE_SIZE > maxHeight;
+  return x < 0 || y < 0 || x + TILE_SIZE > MAX_WIDTH || y + TILE_SIZE > MAX_HEIGHT;
 }
-
+  //console.log(squares.length);
 function moveSquare() {
   if (!square || (currentDirection.x === 0 && currentDirection.y === 0)) return;
 
@@ -19,14 +21,27 @@ function moveSquare() {
   const nextY = square.y + currentDirection.y * TILE_SIZE;
 
   if (!isBorder(nextX, nextY)) {
-    square.x = nextX;
-    square.y = nextY;
+      let prevX = square.x;
+      let prevY = square.y;
+
+      square.position.set(nextX, nextY);
+
+      for (let i = 0; i < squares.length; i++) {
+            const sq = squares[i];
+            const currentX = sq.x;
+            const currentY = sq.y;
+      
+            sq.position.set(prevX, prevY);
+      
+            prevX = currentX;
+            prevY = currentY;
+      }
   } else {
     currentDirection = { x: 0, y: 0 };
   }
 }
 
-// Bucle de movimiento continuo usando el ticker de PixiJS
+//Continous movement using ticker
 app.ticker.add((ticker) => {
   moveAccumulator += ticker.elapsedMS;
 
